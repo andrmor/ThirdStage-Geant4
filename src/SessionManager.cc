@@ -42,7 +42,6 @@ void SessionManager::runSimulation()
         if (NextEventId % 1000 == 0)
             std::cout << NextEventId << std::endl;
 
-        //saveEventNumber();
         UImanager->ApplyCommand("/run/beamOn");
     }
 }
@@ -55,20 +54,23 @@ bool SessionManager::isEndOfInputFileReached() const
 
 void SessionManager::saveWaveforms()
 {
-    std::ofstream outStream;// = new std::ofstream();
-    outStream.open(FileName_Output);
-    if (!outStream.is_open())
-        terminateSession("Cannot open output file: " + FileName_Output);
+    std::cout << "Output file name template:" << std::endl << FileName_Output << std::endl;
 
-    for (int iS=0; iS<NumScint; iS++)
+    for (int iS = 0; iS < NumScint; iS++)
     {
-        std::stringstream text;
-        for (int iW=0; iW<WaveformLength; iW++)
-            text << Waveforms[iS][iW] << '\n';
-        outStream << text.rdbuf() << std::endl;
-    }
+        std::ofstream outStream;// = new std::ofstream();
+        std::string name = FileName_Output + std::to_string(iS) + ".txt";
+        outStream.open(name);
+        if (!outStream.is_open())
+            terminateSession("Cannot open output file: " + FileName_Output);
 
-    outStream.close();
+        std::stringstream text;
+        for (int iW = 0; iW < WaveformLength; iW++)
+            text << Waveforms[iS][iW] << '\n';
+
+        outStream << text.rdbuf() << std::endl;
+        outStream.close();
+    }
 }
 
 void SessionManager::prepareInputStream()

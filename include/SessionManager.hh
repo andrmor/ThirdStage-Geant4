@@ -53,7 +53,7 @@ class SessionManager
         CLHEP::RanecuEngine * randGen = nullptr;
 
         int NumScint = 1;
-        int WaveformLength = 1000;
+        int WaveformLength = 10000;
         std::vector<std::vector<short>> Waveforms;
 
 public:

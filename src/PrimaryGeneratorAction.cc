@@ -36,9 +36,6 @@ double bi_exp(double t, double tau1,double tau2)
 #include "G4RunManager.hh"
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
 {
-    //fParticleGun->GeneratePrimaryVertex(anEvent);
-
-    // /*
     SessionManager & SM = SessionManager::getInstance();
 
     SM.NumPhotonsDetected = 0;
@@ -50,6 +47,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
                   <<"  E:"<< r.Energy <<"  T:"<< r.Time
                   <<"  Pos:"<< r.Position[0]  << ' ' << r.Position[1]  << ' ' << r.Position[2] << std::endl;
 
+        //Photon emission position - common for all photons of this record
         fParticleGun->SetParticlePosition(r.Position); //position in millimeters - no need units
 
         SM.NumPhotonsGenerated = r.Energy * 10.0;
@@ -79,24 +77,10 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
                 if (ran2 <= bi_exp(time, SM.RiseTime, SM.DecayTime)/gg)
                     break;
             }
+            time += r.Time;
             fParticleGun->SetParticleTime(time*ns);
 
             fParticleGun->GeneratePrimaryVertex(anEvent);
         }
     }
-
-
-
-    // */
-
-
-    //std::cout << '#' << SM.NextEventId << std::endl;
-
-    /*
-    for (const ParticleRecord & r : GeneratedPrimaries)
-    {
-
-        fParticleGun->GeneratePrimaryVertex(anEvent);
-    }
-    */
 }

@@ -25,18 +25,15 @@ int main(int argc, char** argv)
 
     std::string WorkingDir  = "/home/andr/tmp/test";
     SM.bBinaryInput         = false;
-    std::string InputFile   = "depo.txt";
+    //std::string InputFile   = "depo.txt";
+    std::string InputFile   = "DepoScint__test_seed111111_shift0_runs1000.bin__.txt";
 
     // --- end of user inits ---
 
     SM.FileName_Input  = WorkingDir + "/" + InputFile;
 
-    //std::string tmp = InputFile;
-    //tmp.resize(InputFile.size()-4);
-    SM.FileName_Output = WorkingDir + "/" + "Optical__" + InputFile+ "__";
-    SM.FileName_Output += ".txt";
-
-    std::cout << "Output file name: " << SM.FileName_Output << std::endl;
+    SM.FileName_Output = WorkingDir + "/" + "Optical__" + InputFile+ "__";    
+    std::cout << "Output file name template: " << SM.FileName_Output << std::endl;
 
     SM.randGen = new CLHEP::RanecuEngine();
     SM.randGen->setSeed(Seed);
@@ -89,6 +86,4 @@ int main(int argc, char** argv)
     delete ui;
 
     SM.endSession();
-
-    std::cout << "Output file name:" << std::endl << SM.FileName_Output << std::endl;
 }

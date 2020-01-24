@@ -18,7 +18,7 @@ RunAction::~RunAction() {}
 
 void RunAction::BeginOfRunAction(const G4Run*)
 {
-    qDebug() << "Starting new run...";
+    //qDebug() << "Starting new run...";
 
     //SessionManager & SM = SessionManager::getInstance();
 
@@ -45,6 +45,7 @@ void RunAction::BeginOfRunAction(const G4Run*)
 #include <QString>
 void RunAction::EndOfRunAction(const G4Run* )
 {
+    /*
     qDebug() << "Run finished";
 
     SessionManager & SM = SessionManager::getInstance();
@@ -58,4 +59,5 @@ void RunAction::EndOfRunAction(const G4Run* )
             s += QString::number(SM.Waveforms[iS][iW]) + " ";
         qDebug() << "  " << s;
     }
+    */
 }

@@ -79,7 +79,7 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 
     G4double teflonTop = 2.0*mm;
 
-    G4int    numEl     = 1;//colSizeX / pitch;
+    G4int    numEl     = colSizeX / pitch;
     SM.NumScint        = numEl * 2;
     std::cout << "Number of scintillators: " << SM.NumScint << std::endl;
     G4int HalfNumWalls = ceil(0.5*colSizeY / sciSizeZ);
