@@ -38,7 +38,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
 {
     SessionManager & SM = SessionManager::getInstance();
 
-    SM.NumPhotonsDetected = 0;
+    //SM.NumPhotonsDetected = 0;
 
     const std::vector<DepositionRecord> & Depositions = SM.getNextEventDeposition();
     for (auto & r : Depositions)
@@ -50,8 +50,8 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
         //Photon emission position - common for all photons of this record
         fParticleGun->SetParticlePosition(r.Position); //position in millimeters - no need units
 
-        SM.NumPhotonsGenerated = r.Energy * 10.0;
-        for (int i=0; i<SM.NumPhotonsGenerated; i++)
+        const int NumPhotons = r.Energy * 10.0;
+        for (int i = 0; i < NumPhotons; i++)
         {
             //Photon direction    <- using sphere function of Root
             double a=0, b=0, r2=1.0;
@@ -67,7 +67,7 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
 
             //Photon time  <- using approach from Geant4 (G4Scintillation)
             double time;
-            double DecayTime = (SM.randGen->flat() < SM.FastDecayFraction ? SM.DecayTime1 : SM.DecayTime2);
+            double DecayTime = (SM.randGen->flat() < SM.FastDecayFraction ? SM.DecayTimeFast : SM.DecayTimeSlow);
             double d = (SM.RiseTime + DecayTime) / DecayTime;
             while (true)
             {

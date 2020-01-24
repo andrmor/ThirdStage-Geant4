@@ -22,9 +22,9 @@ int main(int argc, char** argv)
 
     //https://doi.org/10.1016/0168-9002(95)01244-3
     SM.RiseTime             = 14.4;
-    SM.DecayTime1           = 41.0;
+    SM.DecayTimeFast           = 41.0;
     SM.FastDecayFraction    = 0.7;
-    SM.DecayTime2           = 300.0;
+    SM.DecayTimeSlow           = 300.0;
 
     std::string WorkingDir  = "/home/andr/tmp/test";
     //SM.bBinaryInput         = false;
@@ -36,9 +36,7 @@ int main(int argc, char** argv)
     // --- end of user inits ---
 
     SM.FileName_Input  = WorkingDir + "/" + InputFile;
-
     SM.FileName_Output = WorkingDir + "/" + "Optical__" + InputFile+ "__";    
-    std::cout << "Output file name template: " << SM.FileName_Output << std::endl;
 
     SM.randGen = new CLHEP::RanecuEngine();
     SM.randGen->setSeed(Seed);
