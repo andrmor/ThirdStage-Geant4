@@ -177,6 +177,8 @@ void SessionManager::readEventFromBinaryInput()
         else if (header == char(0xff))
         {
             DepositionRecord r;
+            //0xFF(char) ScintNumber(int) ParticleEnergy(double)[keV] Time(double)[ns] X(double)[mm] Y(double)[mm] Z(double)[mm] ParticleName(string) 0x00(char)
+            inStream->read((char*)&r.ScintIndex,   sizeof(int));
             inStream->read((char*)&r.Energy,       sizeof(double));
             inStream->read((char*)&r.Time,         sizeof(double));
             inStream->read((char*)&r.Position[0],  sizeof(double));
@@ -192,8 +194,6 @@ void SessionManager::readEventFromBinaryInput()
             if (inStream->fail())
                 terminateSession("Unexpected format of a line in the binary file with the input particles");
 
-            //r.Particle = makeGeant4Particle(str);
-            //std::cout << str << ' ' << r.Energy << ' ' << r.Time << ' ' << r.Position[0] << ' ' << r.Position[1] << ' ' << r.Position[2] << ' ' << r.Direction[0] << ' ' << r.Direction[1] << ' ' << r.Direction[2] << std::endl;
             ThisEventDeposition.push_back(r);
         }
         else

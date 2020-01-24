@@ -27,9 +27,11 @@ int main(int argc, char** argv)
     SM.DecayTime2           = 300.0;
 
     std::string WorkingDir  = "/home/andr/tmp/test";
-    SM.bBinaryInput         = false;
+    //SM.bBinaryInput         = false;
+    SM.bBinaryInput         = true;
     //std::string InputFile   = "depo.txt";
-    std::string InputFile   = "DepoScint__test_seed111111_shift0_runs1000.bin__.txt";
+    //std::string InputFile   = "DepoScint__test_seed111111_shift0_runs1000.bin__.txt";
+    std::string InputFile   = "DepoScint__test_seed111111_shift0_runs1000.bin__.bin";
 
     // --- end of user inits ---
 
