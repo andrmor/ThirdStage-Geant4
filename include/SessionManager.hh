@@ -41,7 +41,9 @@ class SessionManager
         int NumPhotonsDetected = 0;
 
         double RiseTime  = 0;
-        double DecayTime = 0;
+        double DecayTime1 = 0;
+        double FastDecayFraction = 1.0;
+        double DecayTime2 = 0;
 
         bool bBinaryInput           = false;
         std::string FileName_Input;

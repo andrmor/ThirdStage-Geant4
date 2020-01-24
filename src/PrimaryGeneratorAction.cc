@@ -67,14 +67,15 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event * anEvent)
 
             //Photon time  <- using approach from Geant4 (G4Scintillation)
             double time;
+            double DecayTime = (SM.randGen->flat() < SM.FastDecayFraction ? SM.DecayTime1 : SM.DecayTime2);
+            double d = (SM.RiseTime + DecayTime) / DecayTime;
             while (true)
             {
                 double ran1 = SM.randGen->flat();
                 double ran2 = SM.randGen->flat();
-                double d = (SM.RiseTime + SM.DecayTime) / SM.DecayTime;
-                time = -1.0 * SM.DecayTime * std::log(1.0 - ran1);
-                double gg = d * single_exp(time, SM.DecayTime);
-                if (ran2 <= bi_exp(time, SM.RiseTime, SM.DecayTime)/gg)
+                time = -1.0 * DecayTime * std::log(1.0 - ran1);
+                double gg = d * single_exp(time, DecayTime);
+                if (ran2 <= bi_exp(time, SM.RiseTime, DecayTime)/gg)
                     break;
             }
             time += r.Time;

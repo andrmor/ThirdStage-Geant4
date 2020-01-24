@@ -20,8 +20,11 @@ int main(int argc, char** argv)
 
     long Seed               = 111111;
 
-    SM.RiseTime             = 10.0;
-    SM.DecayTime            = 45.0;
+    //https://doi.org/10.1016/0168-9002(95)01244-3
+    SM.RiseTime             = 14.4;
+    SM.DecayTime1           = 41.0;
+    SM.FastDecayFraction    = 0.7;
+    SM.DecayTime2           = 300.0;
 
     std::string WorkingDir  = "/home/andr/tmp/test";
     SM.bBinaryInput         = false;
